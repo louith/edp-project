@@ -59,8 +59,10 @@ app.put("/users/:id", (req, res) => {
   }
 
   users[index] = {
+    ...users[index],
+    ...req.body,
     id: id,
-    name: req.body.name,
+    // name: req.body.name,
   };
 
   res.json(users[index]);
