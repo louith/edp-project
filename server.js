@@ -1,11 +1,18 @@
 const express = require("express");
 const users = require("./users.js");
 const app = express();
+const cors = require("cors");
+
+app.use(cors());
 
 app.use(express.json()); // IMPORTANT: parse JSON body
 
 const PORT = 3000;
-
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  }),
+);
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
@@ -78,9 +85,11 @@ app.patch("/users/:id", (req, res) => {
     return res.status(404).json({ message: "User not found" });
   }
 
-  if (req.body.name !== undefined) {
-    user.name = req.body.name;
-  }
+  // if (req.body.name !== undefined) {
+  //   user.name = req.body.name;
+  // }
+
+  Object.assign(user, req.body);
 
   res.json(user);
 });
