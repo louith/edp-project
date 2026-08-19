@@ -81,15 +81,15 @@ function validateSignupForm(form) {
 form.addEventListener("submit", onFormSubmit);
 
 // just prints an instance of the object, not the actual key:value pairs
-// function onFormSubmit(event) {
-//   event.preventDefault(); // stop reload
+function onFormSubmit(event) {
+  event.preventDefault(); // stop reload
 
-//   const data = new FormData(event.target);
-//   const dataObject = Object.fromEntries(data.entries());
-//   // const email = data.get("email");
+  const data = new FormData(event.target);
+  const dataObject = Object.fromEntries(data.entries());
+  // const email = data.get("email");
 
-//   console.log(dataObject);
-// }
+  console.log(dataObject);
+}
 
 // traverse FormData with forEach()
 function onFormSubmit(event) {
