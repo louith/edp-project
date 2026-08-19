@@ -58,6 +58,14 @@ function onFormSubmit(event) {
   const name = data.get("name");
   const email = data.get("email");
   console.log(`Name: ${name}, Email: ${email}`);
+
+  const payload = Object.fromEntries(data.entries());
+
+  fetch("/api/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 }
 
 // including FormValidation onsubmit (using boolean value: isValid as flag)
