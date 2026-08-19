@@ -32,42 +32,6 @@ userPassword.addEventListener("input", () => {
   }
 });
 
-form.addEventListener("submit", onFormSubmit);
-
-// just prints an instance of the object, not the actual key:value pairs
-function onFormSubmit(event) {
-  event.preventDefault(); // stop reload
-  const data = new FormData(event.target);
-  const dataObject = Object.fromEntries(data.entries());
-  console.log(dataObject);
-}
-
-// traverse FormData with forEach()
-function onFormSubmit(event) {
-  event.preventDefault();
-  const data = new FormData(event.target);
-  data.forEach((value, key) => {
-    console.log(`${key}: ${value}`);
-  });
-}
-
-// Accessing Form Data by Name
-function onFormSubmit(event) {
-  event.preventDefault();
-  const data = new FormData(event.target);
-  const name = data.get("name");
-  const email = data.get("email");
-  console.log(`Name: ${name}, Email: ${email}`);
-
-  const payload = Object.fromEntries(data.entries());
-
-  fetch("/api/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-}
-
 // including FormValidation onsubmit (using boolean value: isValid as flag)
 function validateSignupForm(form) {
   const email = form.querySelector("#userEmail").value.trim();
@@ -112,4 +76,43 @@ function validateSignupForm(form) {
   }
 
   return isValid;
+}
+
+form.addEventListener("submit", onFormSubmit);
+
+// just prints an instance of the object, not the actual key:value pairs
+// function onFormSubmit(event) {
+//   event.preventDefault(); // stop reload
+
+//   const data = new FormData(event.target);
+//   const dataObject = Object.fromEntries(data.entries());
+//   // const email = data.get("email");
+
+//   console.log(dataObject);
+// }
+
+// traverse FormData with forEach()
+function onFormSubmit(event) {
+  event.preventDefault();
+  const data = new FormData(event.target);
+  data.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+  });
+}
+
+// // Accessing Form Data by Name
+function onFormSubmit(event) {
+  event.preventDefault();
+  const data = new FormData(event.target);
+  const name = data.get("name");
+  const email = data.get("email");
+  console.log(`Name: ${name}, Email: ${email}`);
+
+  const payload = Object.fromEntries(data.entries());
+
+  fetch("/api/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 }
